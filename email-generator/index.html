@@ -12,30 +12,31 @@
         
         <div class="form-container">
             <h2>Enter Your Information</h2>
-            <form id="signatureForm">
+            <p class="instructions">All fields are optional. Only filled fields will appear in your signature.</p>
+            <form id="signatureForm" novalidate>
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" placeholder="John Doe" required>
+                    <input type="text" id="name" placeholder="John Doe">
                 </div>
                 
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input type="text" id="title" placeholder="Marketing Manager" required>
+                    <input type="text" id="title" placeholder="Marketing Manager">
                 </div>
                 
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" placeholder="john.doe@example.com" required>
+                    <input type="email" id="email" placeholder="john.doe@example.com">
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" placeholder="(123) 456-7890" required>
+                    <input type="tel" id="phone" placeholder="(123) 456-7890">
                 </div>
                 
                 <div class="form-group">
                     <label for="linkedin">LinkedIn:</label>
-                    <input type="url" id="linkedin" placeholder="https://linkedin.com/in/johndoe" required>
+                    <input type="url" id="linkedin" placeholder="https://linkedin.com/in/johndoe">
                 </div>
                 
                 <button type="submit">Generate Signature</button>
@@ -43,11 +44,23 @@
         </div>
         
         <div class="signature-container">
-            <h2>Your Email Signature</h2>
+            <h5>Your Email Signature</h5>
             <p class="instructions">Click the signature below to select it, then copy (Ctrl+C or ⌘+C)</p>
             <div id="signature" class="signature">
-                <!-- Signature will be generated here -->
-                <p>Fill out the form and click "Generate Signature"</p>
+                <table cellspacing="0" cellpadding="0" border="0" style="font-family: Arial, sans-serif; color: #333333; font-size: 14px; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <tr>
+                        <td valign="top" style="vertical-align: top; padding-right: 15px; mso-line-height-rule: exactly;">
+                            <img src="https://cdn.prod.website-files.com/67a0c5fefed4e777aea3272f/67a4ef2398073801e01677d3_GIH_Favicon256.png" alt="Company Logo" width="80" height="80" style="display: block; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;">
+                        </td>
+                        <td valign="top" style="vertical-align: top; border-left: 2px solid #cccccc; padding-left: 15px; mso-line-height-rule: exactly;">
+                            <p id="sig-name" style="margin: 0; padding: 0; font-weight: bold; font-size: 16px; line-height: 20px; mso-line-height-rule: exactly;">Your Name</p>
+                            <p id="sig-title" style="margin: 0; padding: 0; color: #666666; font-style: italic; line-height: 20px; mso-line-height-rule: exactly;">Your Title</p>
+                            <p id="sig-email" style="margin: 8px 0 0 0; padding: 0; line-height: 20px; mso-line-height-rule: exactly;"><a href="mailto:email@example.com" style="color: #0066cc; text-decoration: none;">email@example.com</a></p>
+                            <p id="sig-phone" style="margin: 3px 0 0 0; padding: 0; line-height: 20px; mso-line-height-rule: exactly;">(123) 456-7890</p>
+                            <p id="sig-linkedin" style="margin: 3px 0 0 0; padding: 0; line-height: 20px; mso-line-height-rule: exactly;"><a href="#" target="_blank" style="color: #0066cc; text-decoration: none;">LinkedIn Profile</a></p>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <button id="copyButton">Copy Signature</button>
         </div>
