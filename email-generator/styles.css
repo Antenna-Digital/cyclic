@@ -79,7 +79,7 @@ button:hover {
 
 /* Signature preview container with visual styling */
 .signature-preview {
-    margin: 20px 0;
+    margin: 2.5rem 0;
     padding: 20px;
     border: 1px dashed #ccc;
     background-color: #ffffff;
