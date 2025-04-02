@@ -61,19 +61,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (email) {
-            // Get the email link and its span
+            // Get the email link and its font element
             const emailLink = sigEmail.querySelector('a');
-            const emailSpan = emailLink.querySelector('span');
+            const emailFont = emailLink.querySelector('font');
             
             // Update the link href
             emailLink.href = `mailto:${email}`;
             
-            // Update the span content
-            emailSpan.textContent = email;
-            
-            // Ensure color is set on both link and span
-            emailLink.style.color = "#120E17";
-            emailSpan.style.color = "#120E17";
+            // Update the font content
+            emailFont.textContent = email;
             
             // Show the email element
             sigEmail.style.display = 'block';
