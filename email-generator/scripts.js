@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update signature elements with form values or hide if empty
         if (name) {
+            // Only update the text content, preserving all styling
             sigName.textContent = name;
             sigName.style.display = 'block';
         } else {
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (title) {
+            // Only update the text content, preserving all styling
             sigTitle.textContent = title;
             sigTitle.style.display = 'block';
         } else {
@@ -59,7 +61,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (email) {
-            sigEmail.innerHTML = `<a href="mailto:${email}" style="color: #333333; text-decoration: none;">${email}</a>`;
+            // Preserve all styling when updating the email link
+            const emailLink = sigEmail.querySelector('a');
+            emailLink.href = `mailto:${email}`;
+            emailLink.textContent = email;
             sigEmail.style.display = 'block';
         } else {
             sigEmail.style.display = 'none';
