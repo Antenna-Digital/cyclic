@@ -61,17 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (email) {
-            // Get the email link and its font element
-            const emailLink = sigEmail.querySelector('a');
-            const emailFont = emailLink.querySelector('font');
-            
-            // Update the link href
-            emailLink.href = `mailto:${email}`;
-            
-            // Update the font content
-            emailFont.textContent = email;
-            
-            // Show the email element
+            // Simply update the text content
+            sigEmail.textContent = email;
             sigEmail.style.display = 'block';
         } else {
             sigEmail.style.display = 'none';
