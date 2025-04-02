@@ -76,3 +76,19 @@ button:hover {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+/* Signature preview container with visual styling */
+.signature-preview {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    background-color: #ffffff;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* The actual signature has no styling of its own */
+#signature {
+    /* No styling here - this will be copied */
+}

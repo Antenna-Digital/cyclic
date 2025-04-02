@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sigName = document.getElementById('sig-name');
     const sigTitle = document.getElementById('sig-title');
     const sigEmail = document.getElementById('sig-email');
-    const sigPhone = document.getElementById('sig-phone');
+    const sigWebsite = document.getElementById('sig-website');
     const sigLinkedin = document.getElementById('sig-linkedin');
     
     // Create alert element
@@ -35,11 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = document.getElementById('name').value;
         const title = document.getElementById('title').value;
         const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
         const linkedin = document.getElementById('linkedin').value;
         
         // Check if at least one field is filled
-        if (!name && !title && !email && !phone && !linkedin) {
+        if (!name && !title && !email && !linkedin) {
             showAlert('Please fill at least one field to generate a signature.', 'error');
             return;
         }
@@ -60,26 +59,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (email) {
-            // Use proper Outlook-friendly email link
-            sigEmail.innerHTML = `<a href="mailto:${email}" target="_blank" style="color: #0066cc; text-decoration: none;">${email}</a>`;
+            sigEmail.innerHTML = `<a href="mailto:${email}" style="color: #333333; text-decoration: none;">${email}</a>`;
             sigEmail.style.display = 'block';
         } else {
             sigEmail.style.display = 'none';
         }
         
-        if (phone) {
-            sigPhone.textContent = phone;
-            sigPhone.style.display = 'block';
-        } else {
-            sigPhone.style.display = 'none';
-        }
+        // Website is always shown and fixed to globalindustryhub.org
+        // No need to update it as it's already set in the HTML
         
-        if (linkedin) {
-            // Use proper Outlook-friendly link
-            sigLinkedin.innerHTML = `<a href="${linkedin}" target="_blank" rel="noopener noreferrer" style="color: #0066cc; text-decoration: none;">LinkedIn Profile</a>`;
-            sigLinkedin.style.display = 'block';
+        // Find the LinkedIn container paragraph (parent of the link)
+        const linkedinContainer = sigLinkedin.parentElement;
+        
+        if (linkedin && linkedin.trim() !== '') {
+            sigLinkedin.href = linkedin;
+            linkedinContainer.style.display = 'block'; // Show the container paragraph
         } else {
-            sigLinkedin.style.display = 'none';
+            // Hide the entire LinkedIn section if no URL is provided
+            linkedinContainer.style.display = 'none';
         }
         
         // Show success message
