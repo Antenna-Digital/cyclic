@@ -61,10 +61,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (email) {
-            // Preserve all styling when updating the email link
+            // Get the email link and its span
             const emailLink = sigEmail.querySelector('a');
+            const emailSpan = emailLink.querySelector('span');
+            
+            // Update the link href
             emailLink.href = `mailto:${email}`;
-            emailLink.textContent = email;
+            
+            // Update the span content
+            emailSpan.textContent = email;
+            
+            // Ensure color is set on both link and span
+            emailLink.style.color = "#120E17";
+            emailSpan.style.color = "#120E17";
+            
+            // Show the email element
             sigEmail.style.display = 'block';
         } else {
             sigEmail.style.display = 'none';
@@ -78,7 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (linkedin && linkedin.trim() !== '') {
             sigLinkedin.href = linkedin;
-            linkedinContainer.style.display = 'block'; // Show the container paragraph
+            sigLinkedin.style.color = "#120E17";
+            sigLinkedin.setAttribute("color", "#120E17");
+            linkedinContainer.style.display = 'block';
         } else {
             // Hide the entire LinkedIn section if no URL is provided
             linkedinContainer.style.display = 'none';
