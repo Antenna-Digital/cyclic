@@ -45,27 +45,30 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update signature elements with form values or hide if empty
         if (name) {
-            // Only update the text content, preserving all styling
-            sigName.textContent = name;
+            // Update the font element inside the paragraph
+            const fontElement = sigName.querySelector('font');
+            fontElement.textContent = name;
             sigName.style.display = 'block';
         } else {
             sigName.style.display = 'none';
         }
         
         if (title) {
-            // Only update the text content, preserving all styling
-            sigTitle.textContent = title;
+            // Update the font element inside the paragraph
+            const fontElement = sigTitle.querySelector('font');
+            fontElement.textContent = title;
             sigTitle.style.display = 'block';
         } else {
             sigTitle.style.display = 'none';
         }
         
         if (email) {
-            // Simply update the text content
-            sigEmail.textContent = email;
-            sigEmail.style.display = 'block';
+            // Update the font element inside the span
+            const fontElement = sigEmail.querySelector('font');
+            fontElement.textContent = email;
+            sigEmail.parentElement.style.display = 'block';
         } else {
-            sigEmail.style.display = 'none';
+            sigEmail.parentElement.style.display = 'none';
         }
         
         // Website is always shown and fixed to globalindustryhub.org
@@ -76,8 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (linkedin && linkedin.trim() !== '') {
             sigLinkedin.href = linkedin;
-            sigLinkedin.style.color = "#120E17";
-            sigLinkedin.setAttribute("color", "#120E17");
             linkedinContainer.style.display = 'block';
         } else {
             // Hide the entire LinkedIn section if no URL is provided

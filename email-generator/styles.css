@@ -80,7 +80,6 @@ button:hover {
 /* Signature preview container with visual styling */
 .signature-preview {
     margin: 2.5rem 0;
-    padding: 20px;
     border: 1px dashed #ccc;
     background-color: #ffffff;
     border-radius: 4px;
@@ -91,5 +90,14 @@ button:hover {
 
 /* The actual signature has no styling of its own */
 #signature {
+    background-color: #ffffff !important;
+    background-color: #ffffff !important;
+    padding: 20px;
     /* No styling here - this will be copied */
+}
+
+/* Add this to your existing CSS */
+.blueLinks a { 
+    color: inherit !important; 
+    text-decoration: none !important; 
 }

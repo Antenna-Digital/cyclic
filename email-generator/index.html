@@ -6,7 +6,7 @@
     <title>Email Signature Generator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body id="body">
     <div class="container">
         <h1>Email Signature Generator</h1>
         
@@ -46,28 +46,71 @@
             <div class="signature-preview">
                 <!-- Actual signature content without interface styling -->
                 <div id="signature">
+
+                    <style>
+                        /* Fix for Apple Mail blue links */
+                        a[x-apple-data-detectors] {
+                            color: inherit !important;
+                            text-decoration: none !important;
+                            font-size: inherit !important;
+                            font-family: inherit !important;
+                            font-weight: inherit !important;
+                            line-height: inherit !important;
+                        }
+                        
+                        /* Fix for Gmail blue links */
+                        u + #body a {
+                            color: inherit !important;
+                            text-decoration: none !important;
+                            font-size: inherit !important;
+                            font-family: inherit !important;
+                            font-weight: inherit !important;
+                            line-height: inherit !important;
+                        }
+                        
+                        /* Fix for Samsung Mail blue links */
+                        #MessageViewBody a {
+                            color: inherit !important;
+                            text-decoration: none !important;
+                            font-size: inherit !important;
+                            font-family: inherit !important;
+                            font-weight: inherit !important;
+                            line-height: inherit !important;
+                        }
+                    </style>
+
+                    
                     <table cellspacing="0" cellpadding="0" border="0" style="font-family: Arial, sans-serif; color: #120E17; font-size: 12px; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 400px;">
                         <tr>
                             <td colspan="2" style="border-top: 1px solid #cccccc; padding-top: 15px; padding-bottom: 10px;"></td>
                         </tr>
                         <tr>
                             <td valign="top" style="vertical-align: top; padding-right: 15px; width: 311px;">
-                                <p id="sig-name" style="margin: 0; padding: 0; font-weight: bold; font-size: 16px; line-height: 20px; font-family: Arial, sans-serif; color: #120E17; border: 0; text-align: left;">First & Last Name</p>
-                                <p id="sig-title" style="margin: 0; padding: 0; color: #120E17; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; border: 0; text-align: left;">Job Title</p>
-                                
-                                <!-- Simple email text without link -->
-                                <p id="sig-email" style="margin: 10px 0 0 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; color: #120E17; text-align: left;">
-                                    first.last@globalindustryhub.org
+                                <p id="sig-name" style="margin: 0; padding: 0; font-weight: bold; font-size: 16px; line-height: 20px; font-family: Arial, sans-serif; color: #120E17; border: 0; text-align: left;">
+                                    <font face="Arial, sans-serif" color="#120E17" style="font-size: 16px; font-weight: bold;">First & Last Name</font>
+                                </p>
+                                <p id="sig-title" style="margin: 0; padding: 0; color: #120E17; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; font-weight: normal; border: 0; text-align: left;">
+                                    <font face="Arial, sans-serif" color="#120E17" style="font-size: 12px;">Job Title</font>
                                 </p>
                                 
-                                <!-- Simple website text without link -->
-                                <p id="sig-website" style="margin: 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; color: #120E17; text-align: left;">
-                                    globalindustryhub.org
+                                
+                                <!-- Email with proper font tag for Outlook -->
+                                <p style="margin: 16px 0 0 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left;">
+                                    <a id="sig-email" href="mailto:first.last@globalindustryhub.org" target="_blank" rel="noopener noreferrer" style="color: #120E17 !important; text-decoration: none !important; border: none !important; mso-line-height-rule: exactly;">
+                                        <font face="Arial, sans-serif" color="#120E17" style="font-size: 12px;">first.last@globalindustryhub.org</font>
+                                    </a>
                                 </p>
                                 
-                                <!-- Keep LinkedIn as a link since it's an image -->
+                                <!-- Website with proper font tag for Outlook -->
+                                <p style="margin: 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; text-align: left;">
+                                    <a id="sig-website" href="https://globalindustryhub.org" target="_blank" rel="noopener noreferrer" style="color: #120E17 !important; text-decoration: none !important; border: none !important; mso-line-height-rule: exactly;">
+                                        <font face="Arial, sans-serif" color="#120E17" style="font-size: 12px; font-weight: bold;">globalindustryhub.org</font>
+                                    </a>
+                                </p>
+                                
+                                <!-- LinkedIn as a link with image -->
                                 <p style="margin: 16px 0 0 0; padding: 0; font-family: Arial, sans-serif; font-size: 12px; line-height: 16px; border: 0; text-align: left; color: #120E17;">
-                                    <a href="#" id="sig-linkedin" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important;">
+                                    <a href="#" id="sig-linkedin" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important; color: #120E17 !important;">
                                         <img src="https://cdn.prod.website-files.com/67a0c5fefed4e777aea3272f/67ed4c7775742283ffb5703e_aa2da314f63555ecd096e1ae9afab3d1_linkedin.png" 
                                              alt="Connect on LinkedIn" 
                                              width="75" 
@@ -79,7 +122,7 @@
                                 </p>
                             </td>
                             <td valign="top" align="right" style="vertical-align: top; text-align: right; width: 89px; padding-right: 0;">
-                                <a href="https://globalindustryhub.org" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important;">
+                                <a href="https://globalindustryhub.org" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important; color: #120E17 !important;">
                                     <img src="https://cdn.prod.website-files.com/67a0c5fefed4e777aea3272f/67ed4bde91300a21e45d9c79_3e4a4dd62a3b59e6f0a0b55d5ffb06df_gih-logo.png" 
                                          alt="GLOBAL INDUSTRY HUB" 
                                          width="89" 
