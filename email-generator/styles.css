@@ -95,6 +95,10 @@ button:hover {
     padding: 20px;
     /* No styling here - this will be copied */
 }
+/* The actual signature has no styling of its own */
+#signature a {
+    font-size: inherit !important;
+}
 
 /* Add this to your existing CSS */
 .blueLinks a { 
