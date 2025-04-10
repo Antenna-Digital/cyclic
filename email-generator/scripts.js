@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const sigEmail = document.getElementById('sig-email');
     const sigWebsite = document.getElementById('sig-website');
     const sigLinkedin = document.getElementById('sig-linkedin');
+    const sigPhone = document.getElementById('sig-phone');
     
     // Create alert element
     const alertElement = document.createElement('div');
@@ -34,18 +35,18 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get form values
         const name = document.getElementById('name').value;
         const title = document.getElementById('title').value;
+        const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
         const linkedin = document.getElementById('linkedin').value;
         
         // Check if at least one field is filled
-        if (!name && !title && !email && !linkedin) {
+        if (!name && !title && !phone && !email && !linkedin) {
             showAlert('Please fill at least one field to generate a signature.', 'error');
             return;
         }
         
         // Update signature elements with form values or hide if empty
         if (name) {
-            // Update the font element inside the paragraph
             const fontElement = sigName.querySelector('font');
             fontElement.textContent = name;
             sigName.style.display = 'block';
@@ -54,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (title) {
-            // Update the font element inside the paragraph
             const fontElement = sigTitle.querySelector('font');
             fontElement.textContent = title;
             sigTitle.style.display = 'block';
@@ -62,16 +62,26 @@ document.addEventListener('DOMContentLoaded', function() {
             sigTitle.style.display = 'none';
         }
         
+        if (phone) {
+            const fontElement = sigPhone.querySelector('font');
+            const cleanedPhone = phone.replace(/[^\d+]/g, '');
+            fontElement.textContent = phone;
+            sigPhone.href = `tel:${cleanedPhone}`;
+            sigPhone.parentElement.style.display = 'block';
+        } else {
+            sigPhone.parentElement.style.display = 'none';
+        }
+        
         if (email) {
-            // Update the font element inside the span
             const fontElement = sigEmail.querySelector('font');
             fontElement.textContent = email;
+            sigEmail.href = `mailto:${email}`;
             sigEmail.parentElement.style.display = 'block';
         } else {
             sigEmail.parentElement.style.display = 'none';
         }
         
-        // Website is always shown and fixed to globalindustryhub.org
+        // Website is always shown and fixed to cyclicmaterials.earth
         // No need to update it as it's already set in the HTML
         
         // Find the LinkedIn container paragraph (parent of the link)
