@@ -223,6 +223,49 @@ function initScrollAnimations() {
   });
 }
 
+// Finsweet Stuff
+function finsweetStuff() {
+  console.debug(
+    "%c [DEBUG] Starting finsweetStuff",
+    "background: #33cc33; color: white"
+  );
+  window.fsAttributes = window.fsAttributes || [];
+
+  window.fsAttributes.push([
+    "cmsfilter",
+    (filterInstances) => {
+      console.debug("cmsfilter Successfully loaded!");
+
+      const [filterInstance] = filterInstances;
+
+      if (filterInstance) {
+        filterInstance.listInstance.on("renderitems", (renderedItems) => {
+          setTimeout(function () {
+            ScrollTrigger.refresh();
+          }, 1000);
+        });
+      }
+    },
+  ]);
+
+  window.fsAttributes.push([
+    "cmsload",
+    (listInstances) => {
+      console.debug("cmsload Successfully loaded!");
+
+      const [listInstance] = listInstances;
+
+      if (listInstance) {
+        listInstance.on("renderitems", (renderedItems) => {
+          setTimeout(function () {
+            ScrollTrigger.refresh();
+          }, 1000);
+        });
+      }
+    },
+  ]);
+}
+
 // Init Function
 const init = () => {
   console.debug("%cRun init", "color: lightgreen;");
