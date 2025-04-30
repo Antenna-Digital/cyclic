@@ -9,9 +9,9 @@ function debounce(func, delay) {
   };
 }
 
-// Register GSAP Stuff
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(CustomEase);
+// Register GSAP Stuff (now done in Webflow)
+// gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(CustomEase);
 
 // GSAP Custom Eases
 CustomEase.create("out-quad", "0.5, 1, 0.89, 1");
