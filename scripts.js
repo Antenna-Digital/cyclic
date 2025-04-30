@@ -103,7 +103,7 @@ function initScrollAnimations() {
 
   let lastTriggerTime = 0; // Store the timestamp of the last group
   let groupIndex = 0; // To reset delay for new groups
-  const resetTime = 0.05; // Time window (in seconds) to reset the stagger delay
+  const resetTime = 0.1; // Time window (in seconds) to reset the stagger delay
 
   let screenWidth = window.innerWidth;
   let transitionAmount = screenWidth < 600 ? 40 : 75;
@@ -127,9 +127,9 @@ function initScrollAnimations() {
 
     const animType = element.getAttribute("data-anim");
     const customDuration =
-      parseFloat(setDuration) || 1;
+      parseFloat(setDuration) || 0.85;
     const customGroupDelay =
-      parseFloat(setGroupDelay) || 0.25;
+      parseFloat(setGroupDelay) || 0.15;
     const customDelay =
       parseFloat(setDelay) || false;
 
@@ -220,6 +220,114 @@ function initScrollAnimations() {
         }
       },
     });
+  });
+}
+
+// Nav Animation on Scroll
+function navAnimationOnScroll() {
+  // Retrieve the initial value of --theme--text before any GSAP manipulation
+  const navElement = document.querySelector(".nav_1_component");
+  const initialTextColor = getComputedStyle(navElement)
+    .getPropertyValue("--_theme---text")
+    .trim();
+  const initialTextInvertColor = getComputedStyle(navElement)
+    .getPropertyValue("--_theme---text-invert")
+    .trim();
+
+  // Calculate the current --nav--height
+  function calculateNavHeight() {
+    const vw = window.innerWidth / 100; // Convert to vw units
+
+    // Values from your clamp function:
+    const minRem = 5;
+    const maxRem = 9.375;
+
+    // Breaking down the middle value: 2.8125rem + 7.29166vw
+    const baseRem = 2.8125;
+    const vwMultiplier = 7.29166;
+
+    // Calculate the fluid value (middle part of clamp)
+    const fluidValue = baseRem + (vwMultiplier * vw) / 16;
+
+    // Apply the clamp logic
+    const finalRemValue = Math.min(Math.max(minRem, fluidValue), maxRem);
+
+    // Convert to pixels (1rem = 16px)
+    // return Math.round(finalRemValue * 16);
+
+    return finalRemValue;
+  }
+
+  // You can then use it like:
+  let initialHeightRem = calculateNavHeight();
+
+  // And update it on resize if needed:
+  window.addEventListener("resize", () => {
+    initialHeightRem = calculateNavHeight();
+  });
+
+  gsap.set(".nav_1_wrap", {
+    backgroundColor: "rgba(7, 39, 45, 0)"
+  });
+
+  gsap.to(".nav_1_wrap", {
+    scrollTrigger: {
+      start: "20px top",
+      end: "150px",
+      scrub: true,
+      ease: "power2.inOut",
+      onUpdate: (self) => {
+        const progress = self.progress;
+
+        // console.log(initialHeightPx, initialHeightRem);
+        const finalHeight = 5;
+        const currentHeight =
+          initialHeightRem + (finalHeight - initialHeightRem) * progress;
+
+        // Update nav height variable
+        document.documentElement.style.setProperty(
+          "--nav_1--height",
+          `${currentHeight}rem`
+        );
+
+        // Get the final color (e.g., --swatch--light)
+        const finalTextColor = getComputedStyle(document.documentElement)
+          .getPropertyValue("--swatch--light")
+          .trim();
+        // Get the final color (e.g., --swatch--dark)
+        const finalTextInvertColor = getComputedStyle(document.documentElement)
+          .getPropertyValue("--swatch--dark")
+          .trim();
+
+        // Interpolate color and update variable
+        const interpolatedColor = gsap.utils.interpolate(
+          initialTextColor,
+          finalTextColor,
+          progress
+        );
+        // Interpolate invert color and update variable
+        const interpolatedInvertColor = gsap.utils.interpolate(
+          initialTextInvertColor,
+          finalTextInvertColor,
+          progress
+        );
+        navElement.style.setProperty("--_theme---text", interpolatedColor);
+        navElement.style.setProperty(
+          "--_theme---text-invert",
+          interpolatedInvertColor
+        );
+      },
+      onLeaveBack: () => {
+        // Add a slight delay before removing styles
+        setTimeout(() => {
+          navElement.style.removeProperty("--_theme---text");
+          navElement.style.removeProperty("--_theme---text-invert");
+          document.documentElement.style.removeProperty("--nav_1--height");
+        }, 150); // Delay to ensure animation finishes
+      },
+    },
+    backgroundColor: "rgba(7, 39, 45, 1)", // Desired background color
+    duration: 1,
   });
 }
 
@@ -418,6 +526,7 @@ const init = () => {
 
   enableLenis();
   initScrollAnimations();
+  navAnimationOnScroll();
   swipers();
   initializeMarquee();
   finsweetStuff();
