@@ -520,6 +520,49 @@ function finsweetStuff() {
   ]);
 }
 
+// Split Panel Scroll Lock
+function splitPanelScrollLock() {
+  if (document.querySelector('.split-panel-scroll-lock_wrap')) {
+    const splitPanelScrollLockComponents = document.querySelectorAll('.split-panel-scroll-lock_wrap');
+
+    splitPanelScrollLockComponents.forEach((component)=>{
+      ScrollTrigger.create({
+        trigger: component,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: false,
+      });
+    
+      const steps = component.querySelectorAll(".split-panel-scroll-lock_content_step");
+      const images = component.querySelectorAll(".split-panel-scroll-lock_images_wrap img");
+    
+      steps.forEach((step, index) => {
+        ScrollTrigger.create({
+          trigger: step,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => switchActive(index),
+          onEnterBack: () => switchActive(index),
+          // markers: true
+        });
+      });
+    
+      function switchActive(index) {
+        console.log(index);
+        component.querySelector('.split-panel-scroll-lock_index').innerHTML = index + 1;
+
+        images.forEach((img, i) => {
+          img.classList.toggle('is-active', i === index);
+        });
+
+        steps.forEach((step, i) => {
+          step.classList.toggle('is-active', i === index);
+        });
+      }
+    })
+  }
+}
+
 // Init Function
 const init = () => {
   console.debug("%cRun init", "color: lightgreen;");
@@ -530,6 +573,7 @@ const init = () => {
   swipers();
   initializeMarquee();
   finsweetStuff();
+  splitPanelScrollLock();
 }; // end init
 
 $(window).on("load", init);
