@@ -6,8 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const sigName = document.getElementById('sig-name');
     const sigTitle = document.getElementById('sig-title');
     const sigEmail = document.getElementById('sig-email');
-    const sigWebsite = document.getElementById('sig-website');
-    const sigLinkedin = document.getElementById('sig-linkedin');
     const sigPhone = document.getElementById('sig-phone');
     
     // Create alert element
@@ -37,10 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = document.getElementById('title').value;
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
-        const linkedin = document.getElementById('linkedin').value;
         
         // Check if at least one field is filled
-        if (!name && !title && !phone && !email && !linkedin) {
+        if (!name && !title && !phone && !email) {
             showAlert('Please fill at least one field to generate a signature.', 'error');
             return;
         }
@@ -83,17 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Website is always shown and fixed to cyclicmaterials.earth
         // No need to update it as it's already set in the HTML
-        
-        // Find the LinkedIn container paragraph (parent of the link)
-        const linkedinContainer = sigLinkedin.parentElement;
-        
-        if (linkedin && linkedin.trim() !== '') {
-            sigLinkedin.href = linkedin;
-            linkedinContainer.style.display = 'block';
-        } else {
-            // Hide the entire LinkedIn section if no URL is provided
-            linkedinContainer.style.display = 'none';
-        }
         
         // Show success message
         showAlert('Signature generated successfully!');
