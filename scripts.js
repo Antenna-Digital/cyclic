@@ -146,7 +146,7 @@ function initScrollAnimations() {
     // ScrollTrigger with time grouping logic
     ScrollTrigger.create({
       trigger: element,
-      start: "top 80%",
+      start: "top 85%",
       once: true, // Ensure the animation runs only once
       onEnter: () => {
         const currentTime = performance.now() / 1000; // Convert to seconds
@@ -223,6 +223,7 @@ function initScrollAnimations() {
   });
 }
 
+/* LOOK INTO WHY THE NAV HEIGHT IS JUMPING TO 5ish REM ON SCROLL ON MOBILE */
 // Nav Animation on Scroll
 function navAnimationOnScroll() {
   // Retrieve the initial value of --theme--text before any GSAP manipulation
@@ -230,9 +231,9 @@ function navAnimationOnScroll() {
   const initialTextColor = getComputedStyle(navElement)
     .getPropertyValue("--_theme---text")
     .trim();
-  const initialTextInvertColor = getComputedStyle(navElement)
-    .getPropertyValue("--_theme---text-invert")
-    .trim();
+  // const initialTextInvertColor = getComputedStyle(navElement)
+  //   .getPropertyValue("--_theme---text-invert")
+  //   .trim();
 
   // Calculate the current --nav--height
   function calculateNavHeight() {
@@ -292,12 +293,12 @@ function navAnimationOnScroll() {
 
         // Get the final color (e.g., --swatch--light)
         const finalTextColor = getComputedStyle(document.documentElement)
-          .getPropertyValue("--swatch--light")
+          .getPropertyValue("--swatch--off-white")
           .trim();
         // Get the final color (e.g., --swatch--dark)
-        const finalTextInvertColor = getComputedStyle(document.documentElement)
-          .getPropertyValue("--swatch--dark")
-          .trim();
+        // const finalTextInvertColor = getComputedStyle(document.documentElement)
+        //   .getPropertyValue("--swatch--evergreen")
+        //   .trim();
 
         // Interpolate color and update variable
         const interpolatedColor = gsap.utils.interpolate(
@@ -306,22 +307,22 @@ function navAnimationOnScroll() {
           progress
         );
         // Interpolate invert color and update variable
-        const interpolatedInvertColor = gsap.utils.interpolate(
-          initialTextInvertColor,
-          finalTextInvertColor,
-          progress
-        );
+        // const interpolatedInvertColor = gsap.utils.interpolate(
+        //   initialTextInvertColor,
+        //   finalTextInvertColor,
+        //   progress
+        // );
         navElement.style.setProperty("--_theme---text", interpolatedColor);
-        navElement.style.setProperty(
-          "--_theme---text-invert",
-          interpolatedInvertColor
-        );
+        // navElement.style.setProperty(
+        //   "--_theme---text-invert",
+        //   interpolatedInvertColor
+        // );
       },
       onLeaveBack: () => {
         // Add a slight delay before removing styles
         setTimeout(() => {
           navElement.style.removeProperty("--_theme---text");
-          navElement.style.removeProperty("--_theme---text-invert");
+          // navElement.style.removeProperty("--_theme---text-invert");
           document.documentElement.style.removeProperty("--nav_1--height");
         }, 150); // Delay to ensure animation finishes
       },
@@ -532,10 +533,10 @@ function splitPanelScrollLock() {
         end: "bottom bottom",
         scrub: false,
       });
-    
+
       const steps = component.querySelectorAll(".split-panel-scroll-lock_content_step");
       const images = component.querySelectorAll(".split-panel-scroll-lock_images_wrap img");
-    
+
       steps.forEach((step, index) => {
         ScrollTrigger.create({
           trigger: step,
@@ -546,7 +547,7 @@ function splitPanelScrollLock() {
           // markers: true
         });
       });
-    
+
       function switchActive(index) {
         console.log(index);
         component.querySelector('.split-panel-scroll-lock_index').innerHTML = index + 1;
