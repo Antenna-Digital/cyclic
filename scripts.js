@@ -564,6 +564,25 @@ function splitPanelScrollLock() {
   }
 }
 
+// Open BambooHR links in new tab
+function bambooLinks(){
+  const interval = setInterval(() => {
+    const bambooEl = document.getElementById('BambooHR');
+    if (!bambooEl) return;
+
+    const links = bambooEl.querySelectorAll('a');
+    if (links.length === 0) return;
+
+    links.forEach(link => {
+      // console.log(link);
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    clearInterval(interval); // Stop polling once done
+  }, 1000); // Check every 300ms
+}
+
 // Init Function
 const init = () => {
   console.debug("%cRun init", "color: lightgreen;");
@@ -575,6 +594,7 @@ const init = () => {
   initializeMarquee();
   finsweetStuff();
   splitPanelScrollLock();
+  bambooLinks();
 }; // end init
 
 $(window).on("load", init);
