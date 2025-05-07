@@ -280,7 +280,7 @@ function navAnimationOnScroll() {
       onUpdate: (self) => {
         const progress = self.progress;
 
-        // console.log(initialHeightPx, initialHeightRem);
+        // console.debug(initialHeightPx, initialHeightRem);
         const finalHeight = 5;
         const currentHeight =
           initialHeightRem + (finalHeight - initialHeightRem) * progress;
@@ -336,7 +336,7 @@ function navAnimationOnScroll() {
 function swipers() {
   // Card Slider
   if (document.querySelector(".swiper.card-slider_swiper")) {
-    console.log("card swiper(s) exists");
+    console.debug("card swiper(s) exists");
     const cardSwiperComponents = document.querySelectorAll(".card-slider_wrap");
     cardSwiperComponents.forEach((component) => {
       const swiperEl = component.querySelector('.swiper');
@@ -385,7 +385,7 @@ function swipers() {
 
   // Resources Slider
   if (document.querySelector(".swiper.resources-slider_swiper")) {
-    console.log("resources swiper(s) exists");
+    console.debug("resources swiper(s) exists");
     const resourcesSwiperComponents = document.querySelectorAll(".resources-slider_wrap");
     resourcesSwiperComponents.forEach((component) => {
       const swiperEl = component.querySelector('.swiper');
@@ -551,7 +551,7 @@ function splitPanelScrollLock() {
       });
 
       function switchActive(index) {
-        console.log(index);
+        // console.debug(index);
         component.querySelector('.split-panel-scroll-lock_index').innerHTML = index + 1;
 
         images.forEach((img, i) => {
@@ -576,7 +576,7 @@ function bambooLinks(){
     if (links.length === 0) return;
 
     links.forEach(link => {
-      // console.log(link);
+      // console.debug(link);
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener noreferrer');
     });
@@ -602,7 +602,7 @@ function odometers() {
               : zeroIntegerPart; // Preserve decimal places if present
 
           statVal.innerHTML = formattedZeroValue; // Start from the correct number of digits
-          // console.log(
+          // console.debug(
           //   `Original: ${originalValue}, Zeroed: ${formattedZeroValue}`
           // );
 
