@@ -537,6 +537,8 @@ function splitPanelScrollLock() {
       const steps = component.querySelectorAll(".split-panel-scroll-lock_content_step");
       const images = component.querySelectorAll(".split-panel-scroll-lock_images_wrap img");
 
+      component.querySelector('.split-panel-scroll-lock_total').innerHTML = steps.length;
+
       steps.forEach((step, index) => {
         ScrollTrigger.create({
           trigger: step,
