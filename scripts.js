@@ -9,10 +9,6 @@ function debounce(func, delay) {
   };
 }
 
-function clamp(min, fluid, max) {
-  return Math.min(Math.max(min, fluid), max);
-}
-
 function fluidClamp(minScreen, maxScreen, minValue, maxValue, currentScreen = window.innerWidth) {
   const clampedVW = Math.min(Math.max(currentScreen, minScreen), maxScreen);
   const vwMultiplier = (maxValue - minValue) / (maxScreen - minScreen);
