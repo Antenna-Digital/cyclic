@@ -479,45 +479,48 @@ const initializeMarquee = () => {
 }; // end marquee stuff
 
 // Finsweet Stuff
+// https://finsweet.com/attributes/attributes-api
 function finsweetStuff() {
   console.debug(
     "%c [DEBUG] Starting finsweetStuff",
     "background: #33cc33; color: white"
   );
-  window.fsAttributes = window.fsAttributes || [];
 
-  window.fsAttributes.push([
-    "cmsfilter",
-    (filterInstances) => {
-      console.debug("cmsfilter Successfully loaded!");
-
-      const [filterInstance] = filterInstances;
-
-      if (filterInstance) {
-        filterInstance.listInstance.on("renderitems", (renderedItems) => {
-          setTimeout(function () {
-            ScrollTrigger.refresh();
-          }, 1000);
-        });
-      }
-    },
-  ]);
-
-  window.fsAttributes.push([
-    "cmsload",
+  window.FinsweetAttributes ||= [];
+  window.FinsweetAttributes.push([
+    'list',
     (listInstances) => {
-      console.debug("cmsload Successfully loaded!");
+      listInstances.forEach((list)=>{
+        list.addHook("afterRender", (items) => {
+          ScrollTrigger.refresh();
+        })
+      });
 
-      const [listInstance] = listInstances;
-
-      if (listInstance) {
-        listInstance.on("renderitems", (renderedItems) => {
-          setTimeout(function () {
-            ScrollTrigger.refresh();
-          }, 1000);
+      /* Log all stages of lifecycle */
+      /*
+      const phases = [
+        'start',
+        'filter',
+        'sort',
+        'pagination',
+        'beforeRender',
+        'render',
+        'afterRender'
+      ];
+      listInstances.forEach((list) => {
+        phases.forEach((phase) => {
+          list.addHook(phase, (items) => {
+            console.log(`[fs-list] Phase: ${phase}`, {
+              listInstance: list,
+              itemCount: items.length,
+              items
+            });
+            return items;
+          });
         });
-      }
-    },
+      });
+      */
+    }
   ]);
 }
 
