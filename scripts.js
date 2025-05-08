@@ -9,6 +9,18 @@ function debounce(func, delay) {
   };
 }
 
+function clamp(min, fluid, max) {
+  return Math.min(Math.max(min, fluid), max);
+}
+
+function fluidClamp(minScreen, maxScreen, minValue, maxValue, currentScreen = window.innerWidth) {
+  const clampedVW = Math.min(Math.max(currentScreen, minScreen), maxScreen);
+  const vwMultiplier = (maxValue - minValue) / (maxScreen - minScreen);
+  const fluidValue = minValue + vwMultiplier * (clampedVW - minScreen);
+
+  return Math.min(Math.max(fluidValue, minValue), maxValue);
+}
+
 // Register GSAP Stuff (now done in Webflow)
 // gsap.registerPlugin(ScrollTrigger);
 // gsap.registerPlugin(CustomEase);
@@ -223,7 +235,6 @@ function initScrollAnimations() {
   });
 }
 
-/* LOOK INTO WHY THE NAV HEIGHT IS JUMPING TO 5ish REM ON SCROLL ON MOBILE */
 // Nav Animation on Scroll
 function navAnimationOnScroll() {
   // Retrieve the initial value of --theme--text before any GSAP manipulation
@@ -231,38 +242,25 @@ function navAnimationOnScroll() {
   const initialTextColor = getComputedStyle(navElement)
     .getPropertyValue("--_theme---text")
     .trim();
-  // const initialTextInvertColor = getComputedStyle(navElement)
-  //   .getPropertyValue("--_theme---text-invert")
-  //   .trim();
 
-  // Calculate the current --nav--height
   function calculateNavHeight() {
-    const vw = window.innerWidth / 100; // Convert to vw units
-
-    // Values from your clamp function:
-    const minRem = 5;
-    const maxRem = 9.375;
-
-    // Breaking down the middle value: 2.8125rem + 7.29166vw
-    const baseRem = 2.8125;
-    const vwMultiplier = 7.29166;
-
-    // Calculate the fluid value (middle part of clamp)
-    const fluidValue = baseRem + (vwMultiplier * vw) / 16;
-
-    // Apply the clamp logic
-    const finalRemValue = Math.min(Math.max(minRem, fluidValue), maxRem);
-
-    // Convert to pixels (1rem = 16px)
-    // return Math.round(finalRemValue * 16);
-
-    return finalRemValue;
+    const navContainer = document.querySelector(".nav_1_mobile_contain");
+    const px = parseFloat(getComputedStyle(navContainer).height);
+    return px / 16;
   }
 
-  // You can then use it like:
   let initialHeightRem = calculateNavHeight();
+  // console.log("initialHeightRem:", initialHeightRem);
 
-  // And update it on resize if needed:
+  function getFluidScrollOffsets() {
+    const startValue = fluidClamp(480, 1440, 5, 20);     // 1–20px fluid
+    const endValue   = fluidClamp(480, 1440, 80, 150);   // 80–150px fluid
+
+    return { startValue, endValue };
+  }
+  let { startValue, endValue } = getFluidScrollOffsets();
+  // console.log(startValue, endValue);
+
   window.addEventListener("resize", () => {
     initialHeightRem = calculateNavHeight();
   });
@@ -273,8 +271,8 @@ function navAnimationOnScroll() {
 
   gsap.to(".nav_1_wrap", {
     scrollTrigger: {
-      start: "20px top",
-      end: "150px",
+      start: `${startValue}px top`,
+      end: `${endValue}px`,
       scrub: true,
       ease: "power2.inOut",
       onUpdate: (self) => {
@@ -295,10 +293,6 @@ function navAnimationOnScroll() {
         const finalTextColor = getComputedStyle(document.documentElement)
           .getPropertyValue("--swatch--off-white")
           .trim();
-        // Get the final color (e.g., --swatch--dark)
-        // const finalTextInvertColor = getComputedStyle(document.documentElement)
-        //   .getPropertyValue("--swatch--evergreen")
-        //   .trim();
 
         // Interpolate color and update variable
         const interpolatedColor = gsap.utils.interpolate(
@@ -306,23 +300,12 @@ function navAnimationOnScroll() {
           finalTextColor,
           progress
         );
-        // Interpolate invert color and update variable
-        // const interpolatedInvertColor = gsap.utils.interpolate(
-        //   initialTextInvertColor,
-        //   finalTextInvertColor,
-        //   progress
-        // );
         navElement.style.setProperty("--_theme---text", interpolatedColor);
-        // navElement.style.setProperty(
-        //   "--_theme---text-invert",
-        //   interpolatedInvertColor
-        // );
       },
       onLeaveBack: () => {
         // Add a slight delay before removing styles
         setTimeout(() => {
           navElement.style.removeProperty("--_theme---text");
-          // navElement.style.removeProperty("--_theme---text-invert");
           document.documentElement.style.removeProperty("--nav_1--height");
         }, 150); // Delay to ensure animation finishes
       },
