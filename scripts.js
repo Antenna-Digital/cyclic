@@ -493,6 +493,7 @@ function finsweetStuff() {
       listInstances.forEach((list)=>{
         list.addHook("afterRender", (items) => {
           ScrollTrigger.refresh();
+          lenis.resize();
         })
       });
 
