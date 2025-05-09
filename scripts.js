@@ -150,12 +150,12 @@ function initScrollAnimations() {
     }
 
     let fromX = 0;
-    const topOffsetPercent = window.innerWidth > 600 ? 85 : 90;
+    // const topOffsetPercent = window.innerWidth > 600 ? 85 : 95;
 
     // ScrollTrigger with time grouping logic
     ScrollTrigger.create({
       trigger: element,
-      start: `top ${topOffsetPercent}%`,
+      start: `top bottom-=15%`,
       once: true, // Ensure the animation runs only once
       onEnter: () => {
         const currentTime = performance.now() / 1000; // Convert to seconds
