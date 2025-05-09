@@ -596,6 +596,8 @@ function odometers() {
             value: formattedZeroValue,
             duration: 3000,
           });
+          od.render();
+          statVal.innerHTML = formattedZeroValue;
           var delay = index * 0.15;
           gsap.to(statVal, {
             ease: "none",
