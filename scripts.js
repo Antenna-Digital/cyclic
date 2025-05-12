@@ -585,17 +585,21 @@ function odometers() {
               ? `${zeroIntegerPart}.${"0".repeat(decimalPart.length)}`
               : zeroIntegerPart; // Preserve decimal places if present
 
-          statVal.innerHTML = formattedZeroValue; // Start from the correct number of digits
+          // statVal.innerHTML = formattedZeroValue; // Start from the correct number of digits
+          statVal.innerHTML = ""; // clear out any preexisting content
           // console.debug(
           //   `Original: ${originalValue}, Zeroed: ${formattedZeroValue}`
           // );
 
+          console.log("Before Odometer:", statVal.innerHTML);
           var od = new Odometer({
             el: statVal,
             format: "(,ddd).dd",
             value: formattedZeroValue,
             duration: 3000,
           });
+          od.render(); // forces odometer to build its internal DOM now
+          console.log("After Odometer:", statVal.innerHTML);
           var delay = index * 0.15;
           gsap.to(statVal, {
             ease: "none",
