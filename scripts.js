@@ -619,6 +619,12 @@ function odometers() {
   }
 }
 
+// Auto-Update Copyright Year
+function copyrightAutoUpdate() {
+  const currentYear = new Date().getFullYear();
+  $("[data-copyright-year]").html(currentYear);
+}
+
 // Init Function
 const init = () => {
   console.debug("%cRun init", "color: lightgreen;");
@@ -632,6 +638,7 @@ const init = () => {
   splitPanelScrollLock();
   bambooLinks();
   odometers();
+  copyrightAutoUpdate();
 }; // end init
 
 $(window).on("load", init);
