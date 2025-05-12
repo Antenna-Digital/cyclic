@@ -11,8 +11,6 @@
         <h1>Email Signature Generator</h1>
         
         <div class="form-container">
-            <h2>Enter Your Information</h2>
-            <p class="instructions">All fields are optional. Only filled fields will appear in your signature.</p>
             <form id="signatureForm" novalidate>
                 <div class="form-group">
                     <label for="name">Name:</label>
@@ -35,8 +33,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="linkedin">LinkedIn URL:</label>
-                    <input type="url" id="linkedin" placeholder="https://linkedin.com/in/username">
+                    <label for="location">Location:</label>
+                    <select id="location">
+                        <option value="" disabled selected>Select a location</option>
+                        <option value="toronto">Toronto</option>
+                        <option value="kingston">Kingston</option>
+                        <option value="mesa">Mesa</option>
+                    </select>
                 </div>
                 
                 <button type="submit">Generate Signature</button>
@@ -85,9 +88,9 @@
                     </style>
 
                     
-                    <table cellspacing="0" cellpadding="0" border="0" style="font-family: Arial, sans-serif; color: #05242A; font-size: 12px; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 325px;">
+                    <table cellspacing="0" cellpadding="0" border="0" style="font-family: Arial, sans-serif; color: #05242A; font-size: 12px; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 335px;">
                         <tr style="padding-top: 15px;">
-                            <td valign="top" style="vertical-align: top; padding-right: 15px; width: 325px; padding-bottom: 20px; display: block;">
+                            <td valign="top" style="vertical-align: top; padding-right: 15px; width: 320px; padding-bottom: 20px; display: block;">
                                 <p id="sig-name" style="margin: 0; padding: 0; font-weight: bold; font-size: 16px; line-height: 20px; font-family: Arial, sans-serif; color: #FA5201; border: 0; text-align: left;">
                                     <font face="Arial, sans-serif" color="#FA5201" style="font-size: 16px; font-weight: bold;">Marie Vaillaud</font>
                                 </p>
@@ -95,66 +98,72 @@
                                     <font face="Arial, sans-serif" color="#05242A" style="font-size: 12px;">Marketing & Communications Director</font>
                                 </p>
                                 
-                                <p style="margin: 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left; display: block;">
+                                <p style="margin: 12px 0 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left; display: block;">
                                     <strong>D:</strong>
                                     <a id="sig-phone" href="tel:+14378361416" rel="noopener noreferrer" style="color: #05242A !important; text-decoration: none !important; border: none !important; mso-line-height-rule: exactly;">
                                         <font face="Arial, sans-serif" color="#05242A" style="font-size: 12px;">+1 (437) 836-1416</font>
                                     </a>
                                 </p>
-                                <p style="margin: 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left; display: block;">
+                                <p style="margin: 3px 0 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left; display: block;">
                                     <strong>E:</strong> <a id="sig-email" href="mailto:marie.vaillaud@cyclicmaterials.earth" target="_blank" rel="noopener noreferrer" style="color: #05242A !important; text-decoration: none !important; border: none !important; mso-line-height-rule: exactly;">
                                         <font face="Arial, sans-serif" color="#05242A" style="font-size: 12px;">marie.vaillaud@cyclicmaterials.earth</font>
                                     </a>
                                 </p>
-                                <p style="margin: 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left;">
-                                    101-320 Bay St., Toronto, ON M5H 4A6, Canada
+                                <p id="sig-address" style="margin: 3px 0 0; padding: 0; line-height: 16px; font-family: Arial, sans-serif; font-size: 12px; text-align: left;">
+                                    <font face="Arial, sans-serif" color="#05242A" style="font-size: 12px;">101-320 Bay St., Toronto, ON M5H 4A6, Canada</font>
                                 </p>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="border-top: 1px solid #cccccc; padding-top: 15px; padding-bottom: 10px;"></td>
+                            <td colspan="2" style="border-top: 1px solid #07272D; padding-top: 15px; padding-bottom: 10px; width: 335px;"></td>
                         </tr>
                         <tr id="link-images">
-                            <td colspan="1" style="text-align: left; width: 225px; height: 100%; display: inline-block; vertical-align: bottom;">
-                                <a href="https://www.cyclicmaterials.earth" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important; color: #05242A !important;">
-                                    <img src="https://placehold.co/120x50" 
-                                         alt="Cyclic Materials website" 
-                                         width="120" 
-                                         height="50" 
-                                         style="display: block; border: 0; height: 50px; width: 120px;" 
-                                         border="0"
-                                    />
-                                </a>
-                            </td>
-                            <td colspan="1" style="text-align: right; vertical-align: bottom; width: 100px; height: 100%; display: inline-block;" id="sig-socials">
-                                <a href="https://www.cyclicmaterials.earth" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border: none !important; display: inline-block; margin-left: 5px;">
-                                    <img src="https://placehold.co/30x30" 
-                                            alt="Custom Icon" 
-                                            width="30" 
-                                            height="30" 
-                                            style="display: inline-block; border: 0;" 
-                                            border="0"
-                                    />
-                                </a>
-                                <a href="https://www.linkedin.com/company/cyclic-materials" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border: none !important; display: inline-block; margin-left: 5px;">
-                                    <img src="https://placehold.co/30x30" 
-                                            alt="LinkedIn" 
-                                            width="30" 
-                                            height="30" 
-                                            style="display: inline-block; border: 0;" 
-                                            border="0"
-                                    />
-                                </a>
+                            <td style="width: 335px; padding: 0; vertical-align: bottom;">
+                                <table cellspacing="0" cellpadding="0" border="0" style="width: 335px; border-collapse: collapse;">
+                                    <tr>
+                                        <td style="text-align: left; vertical-align: bottom; width: 200px;">
+                                            <a href="https://www.cyclicmaterials.earth" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important; color: #05242A !important;">
+                                                <img src="https://cdn.prod.website-files.com/650a090456d6370b954c91eb/6813b0b9b37b4575073b2837_CM_logo.png" 
+                                                    alt="Cyclic Materials website" 
+                                                    width="106" 
+                                                    height="43" 
+                                                    style="display: block; border: 0; height: 43px; width: 106px;" 
+                                                    border="0"
+                                                />
+                                            </a>
+                                        </td>
+                                        <td style="text-align: right; vertical-align: bottom; width: 135px;">
+                                            <a href="https://www.cyclicmaterials.earth" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border: none !important; display: inline-block; margin-left: 2px;">
+                                                <img src="https://cdn.prod.website-files.com/650a090456d6370b954c91eb/6813b0b9a858c8ac9fb9680d_e5cde495e606394069a40abd12ada4de_CM_Icon.png" 
+                                                    alt="Custom Icon" 
+                                                    width="33" 
+                                                    height="33" 
+                                                    style="display: inline-block; border: 0; height: 33px; width: 33px;" 
+                                                    border="0"
+                                                />
+                                            </a>
+                                            <a href="https://www.linkedin.com/company/cyclic-materials" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border: none !important; display: inline-block; margin-left: 2px;">
+                                                <img src="https://cdn.prod.website-files.com/650a090456d6370b954c91eb/6813b0b92e5b9e544d9f5f38_CM_LinkedIn%20Icon.png" 
+                                                    alt="LinkedIn" 
+                                                    width="33" 
+                                                    height="33" 
+                                                    style="display: inline-block; border: 0; height: 33px; width: 33px;" 
+                                                    border="0"
+                                                />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="padding-top: 15px;">
+                            <td colspan="2" style="padding-top: 32px; text-align: left; padding-right: 0; width: 335px;">
                                 <a href="https://www.cyclicmaterials.earth" target="_blank" rel="noopener noreferrer" style="text-decoration: none !important; border-bottom: none !important; outline: none !important; color: #05242A !important;">
-                                    <img src="https://placehold.co/325x100" 
+                                    <img src="https://cdn.prod.website-files.com/650a090456d6370b954c91eb/6813b1c6162812e8ebb482e6_CM_bottom.png" 
                                          alt="Join Us" 
-                                         width="325" 
-                                         height="100" 
-                                         style="display: block; border: 0; height: 100px; width: 325px;" 
+                                         width="335" 
+                                         height="92" 
+                                         style="display: block; border: 0; height: auto; width: 335px;" 
                                          border="0"
                                     />
                                 </a>

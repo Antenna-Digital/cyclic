@@ -12,7 +12,7 @@ label {
     font-weight: bold;
 }
 
-input {
+input, select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
