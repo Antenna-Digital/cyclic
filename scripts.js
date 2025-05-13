@@ -608,13 +608,30 @@ function timeline() {
         const oldItem = headerItems[currentIndex];
         const newItem = headerItems[newIndex];
 
-        const oldTextWrap = oldItem.querySelector('.timeline_header_content_inner');
-        const newTextWrap = newItem.querySelector('.timeline_header_content_inner');
+        const oldContentWrap = oldItem.querySelector('.timeline_header_content_inner');
+        const newContentWrap = newItem.querySelector('.timeline_header_content_inner');
 
-        gsap.to(oldTextWrap.children, {
-          y: -25,
+        const oldContentWrapText = oldContentWrap.querySelector('.timeline_header_content_text_wrap');
+        const newContentWrapText = newContentWrap.querySelector('.timeline_header_content_text_wrap');
+
+        const oldHeadingWrap = oldContentWrap.querySelector('.timeline_header_content_heading_wrap');
+        const newHeadingWrap = newContentWrap.querySelector('.timeline_header_content_heading_wrap');
+
+        const oldTagsWrap = oldContentWrap.querySelector('.timeline_header_content_tags_wrap');
+        const newTagsWrap = newContentWrap.querySelector('.timeline_header_content_tags_wrap');
+
+        const oldHeadingContent = oldHeadingWrap.querySelector('.timeline_header_content_heading');
+        const newHeadingContent = newHeadingWrap.querySelector('.timeline_header_content_heading');
+
+        const oldMarqueeContain = oldItem.querySelector('.timeline_header_marquee_contain');
+        const newMarqueeContain = newItem.querySelector('.timeline_header_marquee_contain');
+
+        const oldMarqueeContent = oldMarqueeContain.querySelector('.timeline_header_marquee_content');
+        const newMarqueeContent = newMarqueeContain.querySelector('.timeline_header_marquee_content');
+
+        gsap.to(oldContentWrapText.children, {
           opacity: 0,
-          duration: 0.4,
+          duration: 0.75,
           stagger: 0.05,
           onComplete: () => {
             oldItem.classList.remove('is-active');
@@ -623,12 +640,38 @@ function timeline() {
             newItem.classList.add('is-active');
             navItems[newIndex].classList.add('is-active');
 
-            gsap.set(newTextWrap.children, { y: 25, opacity: 0 });
+            // Reset the translateY and opacity for the heading and text wraps
+            gsap.set(newContentWrapText.children, { opacity: 0 });
+            gsap.set(newHeadingContent, { y: newHeadingWrap.offsetHeight });
+            gsap.set(newMarqueeContent, { y: newMarqueeContain.offsetHeight });
+            gsap.set(newTagsWrap.children, { opacity: 0 });
 
-            gsap.to(newTextWrap.children, {
+            gsap.to(newContentWrapText.children, {
+              opacity: 1,
+              duration: 0.75,
+              stagger: 0.05
+            });
+
+            gsap.to(newHeadingContent, {
+              y: 0,
+              duration: 0.75
+            });
+
+            gsap.to(newMarqueeContent, {
+              y: 0,
+              duration: 0.75
+            });
+
+            gsap.to(newTagsWrap.children, {
+              opacity: 1,
+              duration: 0.75,
+              ease: 'power1.inOut'
+            });
+
+            gsap.to(newContentWrap.children, {
               y: 0,
               opacity: 1,
-              duration: 0.4,
+              duration: 0.75,
               stagger: 0.05,
               onComplete: () => {
                 currentIndex = newIndex;
@@ -639,6 +682,25 @@ function timeline() {
               }
             });
           }
+        });
+
+        gsap.to(oldHeadingContent, {
+          y: -oldHeadingWrap.offsetHeight,
+          duration: 0.75,
+          ease: 'power1.inOut'
+        });
+
+        gsap.to(oldMarqueeContent, {
+          y: -oldMarqueeContain.offsetHeight,
+          duration: 0.75,
+          ease: 'power1.inOut'
+        });
+
+        gsap.to(oldTagsWrap.children, {
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.05,
+          ease: 'power1.inOut'
         });
       }
 
