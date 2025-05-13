@@ -578,6 +578,92 @@ function copyrightAutoUpdate() {
   $("[data-copyright-year]").html(currentYear);
 }
 
+// Timeline
+function timeline() {
+  if (document.querySelector('.timeline_wrap')) {
+    console.debug('timeline(s) exist');
+    const timelineComponents = document.querySelectorAll(".timeline_wrap");
+
+    timelineComponents.forEach((component) => {
+      const headerItems = [...component.querySelectorAll('.timeline_header_collection_item')];
+      const navItems = [...component.querySelectorAll('.timeline_nav_collection_item')];
+      const prevBtn = component.querySelector('.timeline_header_button.is-prev');
+      const nextBtn = component.querySelector('.timeline_header_button.is-next');
+
+      let currentIndex = headerItems.findIndex(item => item.classList.contains('is-active'));
+      let isTransitioning = false;
+
+      // Set first active state if none
+      if (currentIndex === -1) {
+        headerItems[0].classList.add('is-active');
+        navItems[0].classList.add('is-active');
+        currentIndex = 0;
+      }
+
+      function animateTimelineTransition(newIndex) {
+        if (isTransitioning || newIndex === currentIndex || newIndex < 0 || newIndex >= headerItems.length) return;
+
+        isTransitioning = true;
+
+        const oldItem = headerItems[currentIndex];
+        const newItem = headerItems[newIndex];
+
+        const oldTextWrap = oldItem.querySelector('.timeline_header_content_inner');
+        const newTextWrap = newItem.querySelector('.timeline_header_content_inner');
+
+        gsap.to(oldTextWrap.children, {
+          y: -25,
+          opacity: 0,
+          duration: 0.4,
+          stagger: 0.05,
+          onComplete: () => {
+            oldItem.classList.remove('is-active');
+            navItems[currentIndex].classList.remove('is-active');
+
+            newItem.classList.add('is-active');
+            navItems[newIndex].classList.add('is-active');
+
+            gsap.set(newTextWrap.children, { y: 25, opacity: 0 });
+
+            gsap.to(newTextWrap.children, {
+              y: 0,
+              opacity: 1,
+              duration: 0.4,
+              stagger: 0.05,
+              onComplete: () => {
+                currentIndex = newIndex;
+                isTransitioning = false;
+
+                prevBtn.classList.toggle('is-disabled', currentIndex === 0);
+                nextBtn.classList.toggle('is-disabled', currentIndex === headerItems.length - 1);
+              }
+            });
+          }
+        });
+      }
+
+      prevBtn.addEventListener('click', () => {
+        animateTimelineTransition(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        animateTimelineTransition(currentIndex + 1);
+      });
+
+      navItems.forEach((navItem, index) => {
+        navItem.addEventListener('click', () => {
+          animateTimelineTransition(index);
+        });
+      });
+
+      // Initial button state
+      prevBtn.classList.toggle('is-disabled', currentIndex === 0);
+      nextBtn.classList.toggle('is-disabled', currentIndex === headerItems.length - 1);
+    });
+  }
+}
+
+
 // Init Function
 const init = () => {
   console.debug("%cRun init", "color: lightgreen;");
@@ -591,6 +677,7 @@ const init = () => {
   bambooLinks();
   odometers();
   copyrightAutoUpdate();
+  timeline();
 }; // end init
 
 $(window).on("load", init);
