@@ -671,7 +671,7 @@ function timeline() {
             gsap.to(newContentWrap.children, {
               y: 0,
               opacity: 1,
-              duration: 0.75,
+              duration: 0,
               stagger: 0.05,
               onComplete: () => {
                 currentIndex = newIndex;
