@@ -411,53 +411,6 @@ function swipers() {
   }
 }
 
-// Marquee Stuff
-const initializeMarquee = () => {
-  const marquee = document.querySelector('[wb-data="marquee"]');
-  if (!marquee) return;
-
-  let duration = parseFloat(marquee.getAttribute("duration-per-item")) || 2.5;
-  const marqueeContent = marquee.firstChild;
-  if (!marqueeContent) return;
-
-  const itemList = marquee.querySelector(".w-dyn-items");
-  if (itemList) {
-    const childrenCount = itemList.children.length;
-    duration *= childrenCount; // Multiply the duration by the number of direct children
-  }
-
-  const marqueeContentClone = marqueeContent.cloneNode(true);
-  marquee.append(marqueeContentClone); // Ensure cloned content is appended correctly
-
-  let tween;
-
-  const playMarquee = () => {
-    let progress = tween ? tween.progress() : 0;
-    tween && tween.progress(0).kill();
-
-    const width = parseInt(
-      getComputedStyle(marqueeContent).getPropertyValue("width")
-    );
-    const distanceToTranslate = -1 * width;
-
-    tween = gsap.fromTo(
-      marquee.children,
-      { xPercent: 0 },
-      {
-        xPercent: -100,
-        duration,
-        ease: "none",
-        repeat: -1,
-      }
-    );
-    tween.progress(progress);
-  };
-
-  playMarquee();
-
-  window.addEventListener("resize", debounce(playMarquee));
-}; // end marquee stuff
-
 // Finsweet Stuff
 // https://finsweet.com/attributes/attributes-api
 function finsweetStuff() {
@@ -633,7 +586,6 @@ const init = () => {
   initScrollAnimations();
   navAnimationOnScroll();
   swipers();
-  initializeMarquee();
   finsweetStuff();
   splitPanelScrollLock();
   bambooLinks();
