@@ -654,6 +654,12 @@ function timeline() {
             newItem.classList.add('is-active');
             navItems[newIndex].classList.add('is-active');
 
+            navItems[newIndex].scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center', // or 'nearest' depending on your layout
+              block: 'nearest'
+            });
+
             // Reset the translateY and opacity for the heading and text wraps
             gsap.set(newContentWrapText.children, { opacity: 0 });
             gsap.set(newHeadingContent, { y: newHeadingWrap.offsetHeight });
