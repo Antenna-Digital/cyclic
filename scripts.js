@@ -42,17 +42,57 @@ function enableLenis() {
 
   let isPaused = false;
 
-  document.querySelectorAll('.w-nav-button').forEach(button => {
-    button.addEventListener('click', () => {
+  document.addEventListener('click', (e) => {
+    const navButton = e.target.closest('.w-nav-button');
+    const navWrap = e.target.closest('.nav_1_mobile_contain');
+
+    // Case 1: Toggle on button click
+    if (navButton) {
+      isPaused ? lenis.start() : lenis.stop();
+      isPaused = !isPaused;
+      return;
+    }
+
+    // Case 2: Resume only if click is inside nav wrap (not on button) and nav is open
+    if (navWrap && !navWrap.contains(navButton)) {
       if (isPaused) {
-        lenis.start(); // Resume smooth scrolling
+        lenis.start();
         isPaused = false;
-      } else {
-        lenis.stop(); // Pause smooth scrolling
-        isPaused = true;
       }
-    });
+    }
   });
+
+  function trapScroll(el) {
+    el.addEventListener('wheel', (e) => {
+      const delta = e.deltaY;
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+
+      if ((delta < 0 && atTop) || (delta > 0 && atBottom)) {
+        e.preventDefault();
+      }
+      // Allow scroll inside the element if it's not at an edge
+    }, { passive: false });
+
+    let startY = 0;
+
+    el.addEventListener('touchstart', (e) => {
+      startY = e.touches[0].clientY;
+    });
+
+    el.addEventListener('touchmove', (e) => {
+      const deltaY = startY - e.touches[0].clientY;
+      const atTop = el.scrollTop <= 0;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+
+      if ((deltaY < 0 && atTop) || (deltaY > 0 && atBottom)) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  }
+
+  const navScroll = document.querySelector('.nav_1_menu_scroll');
+  if (navScroll) trapScroll(navScroll);
 }
 
 /** Scroll Animations
