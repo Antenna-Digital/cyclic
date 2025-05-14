@@ -39,6 +39,20 @@ function enableLenis() {
   gsap.ticker.lagSmoothing(0);
 
   lenis.start();
+
+  let isPaused = false;
+
+  document.querySelectorAll('.w-nav-button').forEach(button => {
+    button.addEventListener('click', () => {
+      if (isPaused) {
+        lenis.start(); // Resume smooth scrolling
+        isPaused = false;
+      } else {
+        lenis.stop(); // Pause smooth scrolling
+        isPaused = true;
+      }
+    });
+  });
 }
 
 /** Scroll Animations
@@ -631,7 +645,7 @@ function timeline() {
 
         gsap.to(oldContentWrapText.children, {
           opacity: 0,
-          duration: 0.75,
+          duration: 0.7,
           stagger: 0.05,
           onComplete: () => {
             oldItem.classList.remove('is-active');
@@ -648,23 +662,23 @@ function timeline() {
 
             gsap.to(newContentWrapText.children, {
               opacity: 1,
-              duration: 0.75,
+              duration: 0.7,
               stagger: 0.05
             });
 
             gsap.to(newHeadingContent, {
               y: 0,
-              duration: 0.75
+              duration: 0.7
             });
 
             gsap.to(newMarqueeContent, {
               y: 0,
-              duration: 0.75
+              duration: 0.7
             });
 
             gsap.to(newTagsWrap.children, {
               opacity: 1,
-              duration: 0.75,
+              duration: 0.7,
               ease: 'power1.inOut'
             });
 
@@ -686,19 +700,19 @@ function timeline() {
 
         gsap.to(oldHeadingContent, {
           y: -oldHeadingWrap.offsetHeight,
-          duration: 0.75,
+          duration: 0.7,
           ease: 'power1.inOut'
         });
 
         gsap.to(oldMarqueeContent, {
           y: -oldMarqueeContain.offsetHeight,
-          duration: 0.75,
+          duration: 0.7,
           ease: 'power1.inOut'
         });
 
         gsap.to(oldTagsWrap.children, {
           opacity: 0,
-          duration: 0.75,
+          duration: 0.7,
           stagger: 0.05,
           ease: 'power1.inOut'
         });
