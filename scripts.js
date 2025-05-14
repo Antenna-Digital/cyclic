@@ -732,7 +732,7 @@ const init = () => {
 
   enableLenis();
   initScrollAnimations();
-  navAnimationOnScroll();
+  // navAnimationOnScroll();
   swipers();
   finsweetStuff();
   splitPanelScrollLock();
