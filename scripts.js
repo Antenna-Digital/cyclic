@@ -95,6 +95,44 @@ function setupLenis() {
   if (navScroll) trapScroll(navScroll);
 }
 
+// grabCursor setup
+function setupGrabCursor(elem) {
+  // Function to set grab cursor (mimicking Swiper's grabCursor behavior)
+  function setGrabCursor() {
+    elem.style.cursor = "grab";
+    elem.style.touchAction = "none"; // Prevent default touch scrolling issues
+  }
+
+  // Function to set grabbing cursor
+  function setGrabbingCursor() {
+    elem.style.cursor = "grabbing";
+  }
+
+  // Ensure the scrollbar exists before adding event listeners
+  if (elem) {
+    // Apply grab cursor when pointer enters scrollbar
+    elem.addEventListener("pointerenter", setGrabCursor);
+
+    // Change to grabbing on pointer down (start dragging)
+    elem.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse") {
+        // Ensure it's not a touch event
+        setGrabbingCursor();
+      }
+    });
+
+    // Reset to grab cursor when dragging stops
+    document.addEventListener("pointerup", () => {
+      setGrabCursor();
+    });
+
+    // Reset cursor when mouse leaves the scrollbar drag
+    elem.addEventListener("pointerleave", () => {
+      setGrabCursor();
+    });
+  }
+}
+
 /** Scroll Animations
  *
  * Usage:
@@ -419,6 +457,9 @@ function swipers() {
           }
         }
       });
+
+      const scrollbarDrag = scrollbarEl.querySelector(".swiper-scrollbar-drag");
+      setupGrabCursor(scrollbarDrag);
     });
   }
 
@@ -471,6 +512,9 @@ function swipers() {
           }
         }
       });
+
+      const scrollbarDrag = scrollbarEl.querySelector(".swiper-scrollbar-drag");
+      setupGrabCursor(scrollbarDrag);
     });
   }
 }
