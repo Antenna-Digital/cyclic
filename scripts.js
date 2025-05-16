@@ -27,7 +27,7 @@ CustomEase.create("out-quad", "0.5, 1, 0.89, 1");
 let lenis;
 
 // Lenis setup
-function enableLenis() {
+function setupLenis() {
   lenis = new Lenis();
 
   lenis.on("scroll", ScrollTrigger.update);
@@ -388,13 +388,18 @@ function swipers() {
         scrollbar: {
           el: scrollbarEl,
           draggable: true,
-          dragSize: 200,
+          dragSize: 120,
         },
         navigation: {
           prevEl: prevBtn,
           nextEl: nextBtn,
         },
         breakpoints: {
+          500: {
+            scrollbar: {
+              dragSize: 200,
+            },
+          },
           800: {
             slidesPerView: 2,
             scrollbar: {
@@ -437,13 +442,18 @@ function swipers() {
         scrollbar: {
           el: scrollbarEl,
           draggable: true,
-          dragSize: 200,
+          dragSize: 120,
         },
         navigation: {
           prevEl: prevBtn,
           nextEl: nextBtn,
         },
         breakpoints: {
+          500: {
+            scrollbar: {
+              dragSize: 200,
+            },
+          },
           800: {
             scrollbar: {
               dragSize: 400,
@@ -790,7 +800,7 @@ function timeline() {
 const init = () => {
   console.debug("%cRun init", "color: lightgreen;");
 
-  enableLenis();
+  setupLenis();
   initScrollAnimations();
   // navAnimationOnScroll();
   swipers();
