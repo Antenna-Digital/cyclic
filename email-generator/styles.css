@@ -105,3 +105,6 @@
     color: inherit !important; 
     text-decoration: none !important; 
 }
+
+.email-gen_container :is([class*="u-text-style-"],h1,h2,h3,h4,h5,h6,p):not(.w-richtext,.u-text-trim-off)::before,
+.email-gen_container :is([class*="u-text-style-"],h1,h2,h3,h4,h5,h6,p):not(.w-richtext,.u-text-trim-off)::after { content: none; }
