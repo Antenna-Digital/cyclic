@@ -1,4 +1,4 @@
-.email-gen_container .form-container, .signature-container {
+.email-gen_container .form-container, .email-gen_container .signature-container {
     margin-bottom: 40px;
 }
 
@@ -12,7 +12,8 @@
     font-weight: bold;
 }
 
-.email-gen_container input {
+.email-gen_container input,
+.email-gen_container select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
