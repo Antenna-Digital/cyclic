@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Define location addresses
     const locationAddresses = {
-        toronto: '101-320 Bay St., Toronto, ON M5H 4A6, Canada',
+        toronto: '400-70 Bond St., Toronto, ON M5B 1X3, Canada',
         kingston: '108-650 Cataraqui Woods Dr., Kingston, ON, K7P 2Y4, Canada',
         mesa: '3707 E Southern Ave Fl 1-2, Mesa, AZ, 85206, USA'
     };
