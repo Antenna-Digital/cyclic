@@ -444,7 +444,7 @@ function swipers() {
               dragSize: 400,
             },
           },
-          1200: {
+          1250: {
             slidesPerView: 3,
             scrollbar: {
               dragSize: 640,
